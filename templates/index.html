@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+<p>Hello, I will be a child template.</p>
+<p>List of added projects so far:<br/></p>
+<ol>
+    {% for project in projects %}
+    <li>
+        Project Code: {{project.projectCode}}<br/>
+        Project Name: {{project.projectName}}<br/>
+        Project Date: {{project.date_added}}<br/>
+        Project Description: {{project.projectDescription}}<br/>
+        Project Members Allowed: {{project.projectMembersAllowed}}<br/>
+        <br/>
+    </li>
+    {% endfor %}
+</ol>
+
+{% endblock content %}
