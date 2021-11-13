@@ -2,6 +2,9 @@
 
 {% block content %}
 <p>Hello, I will be a child template.</p>
+{% if user.is_authenticated %}
+<p>Hello, {{user.username}}</p>
+<a href="{% url 'users:logout' %}">Log out</a>
 <p>List of added projects so far:<br/></p>
 <ol>
     {% for project in projects %}
@@ -15,5 +18,9 @@
     </li>
     {% endfor %}
 </ol>
+{% else %}
+Login to view content: <a href="users/login">Log in</a><br>
+New User? Register Here: <a href="users/register">Register</a>
+{% endif %}
 
 {% endblock content %}
