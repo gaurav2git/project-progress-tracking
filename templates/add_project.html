@@ -20,27 +20,27 @@
                 {% csrf_token %}
                 <label>Project Code</label>
                 <div class="mb-3">
-                    <input type="number" name="project_Code" class="form-control" value="{{project.project_Code}}">
+                    <input type="number" name="project_Code" class="form-control">
                 </div>
                 <label>Project Name</label>
                 <div class="mb-3">
-                    <input type="text" name="project_Name" class="form-control" value="{{project.project_Name}}">
+                    <input type="text" name="project_Name" class="form-control">
                 </div>
                 <label>Project Description</label>
                 <div class="mb-3">
-                    <textarea name="project_Description" class="form-control" >{{project.project_Description}}</textarea>
+                    <textarea name="project_Description" class="form-control" ></textarea>
                 </div>
                 <label>Project Members Allowed</label>
                 <div class="mb-3">
-                    <input type="number" name="project_Members_Allowed" class="form-control" value="{{project.project_Members_Allowed}}">
+                    <input type="number" name="project_Members_Allowed" class="form-control">
                 </div>
                 <label>Project Progress (in %)</label>
                 <div class="mb-3">
-                    <input type="number" name="project_Progress" class="form-control" value="{{project.project_Progress}}">
+                    <input type="number" name="project_Progress" class="form-control">
                 </div>
                 <label>Project Closure&nbsp;&nbsp;</label>
                 <div class="mb-3" style="display: inline;">
-                    <input type="checkbox" name="project_Closure" {% if project.project_Closure %}checked{% endif %}>
+                    <input type="checkbox" name="project_Closure">
                     <br>
                     <br>
                 </div>

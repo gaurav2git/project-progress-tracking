@@ -42,7 +42,7 @@
                     <td>
                         <a href="{% url 'projects:project_update' project.id %}"><button type="button" class="btn btn-info">Update</button></a>
                         <button type="button" class="btn btn-info">Add Members</button>
-                        <button type="button" class="btn btn-info">Add Questionaire</button>
+                        <a href="{% url 'projects:view_questionaire' project.id %}"><button type="button" class="btn btn-info">View Questionaire</button></a>
                     </td>
                 </tr>  
                 {% endfor %}

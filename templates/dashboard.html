@@ -34,7 +34,7 @@
                 </div>
               </div>
             </div>
-            <div class="card-body px-0 pb-2">
+            <div class="card-body px-0 pb-2" style="margin-right: 20px;">
               <div class="table-responsive">
                 <table class="table align-items-center mb-0">
                   <thead style="text-align: center;">
@@ -43,6 +43,7 @@
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Project Name</th>
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Date Started</th>
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Members Allowed</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
                     </tr>
                   </thead>
                   <tbody style="text-align: center;">
@@ -59,6 +60,13 @@
                       </td>
                       <td>
                         {{project.project_Members_Allowed}}
+                      </td>
+                      <td>
+                        {% if project.project_Closure %}
+                        <div style="background-color:rgb(231, 144, 144); color: black; padding:5px;">Closed</div>
+                        {% else %}
+                        <div style="background-color:rgb(113, 190, 146); color: black; padding:5px;">Open</div>
+                        {% endif %}
                       </td>
                     </tr>  
                     {% endfor %}

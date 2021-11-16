@@ -17,3 +17,11 @@ class Project(models.Model):
 
     def __str__(self):
         return str(self.project_Code) + "-" + self.project_Name
+
+class Questionaire(models.Model):
+    """Model for adding questionaire"""
+    question = models.TextField()
+    related_Project = models.ForeignKey(Project, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.question[:80] + '...'
