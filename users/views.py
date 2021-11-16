@@ -4,6 +4,9 @@ from django.contrib.auth import authenticate, logout, login
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.decorators import login_required
+
+from .models import *
 
 # Create your views here.
 def logout_view(request):
@@ -26,3 +29,13 @@ def register(request):
     content = {'form':form}
     return render(request, 'register.html', content)
 
+@login_required
+def profile(request):
+    emp_profile = Employee_Profile.objects.filter(related_user = request.user)
+
+    content = {
+            'emp_profile':emp_profile,
+            'page_name':'Profile',
+            'p_active':'active'
+        }
+    return render(request, 'profile.html', content)

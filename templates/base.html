@@ -36,10 +36,10 @@
       <div class="collapse navbar-collapse  w-auto  max-height-vh-100 h-100" id="sidenav-collapse-main">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link  active" href="/">
+            <a class="nav-link {{d_active}}" href="/">
               <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                 <svg width="12px" height="12px" viewBox="0 0 45 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                  <title>shop </title>
+                  <title>dashboard</title>
                   <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                     <g transform="translate(-1716.000000, -439.000000)" fill="#FFFFFF" fill-rule="nonzero">
                       <g transform="translate(1716.000000, 291.000000)">
@@ -56,10 +56,10 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link  " href="../pages/tables.html">
+            <a class="nav-link  " href="/projects/kanban_Board">
               <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                 <svg width="12px" height="12px" viewBox="0 0 42 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                  <title>office</title>
+                  <title>kanban board</title>
                   <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                     <g transform="translate(-1869.000000, -293.000000)" fill="#FFFFFF" fill-rule="nonzero">
                       <g transform="translate(1716.000000, 291.000000)">
@@ -72,7 +72,7 @@
                   </g>
                 </svg>
               </div>
-              <span class="nav-link-text ms-1">Tables</span>
+              <span class="nav-link-text ms-1">Kanban Board</span>
             </a>
           </li>
           <li class="nav-item">
@@ -116,11 +116,13 @@
               <span class="nav-link-text ms-1">Virtual Reality</span>
             </a>
           </li>
+          {% with user.employee_profile_set.all|first as employee %}
+          {% if employee.is_lead %}
           <li class="nav-item">
-            <a class="nav-link  " href="../pages/rtl.html">
+            <a class="nav-link  {{ps_active}}" href="/projects/settings">
               <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                 <svg width="12px" height="12px" viewBox="0 0 40 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                  <title>settings</title>
+                  <title>project settings</title>
                   <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                     <g transform="translate(-2020.000000, -442.000000)" fill="#FFFFFF" fill-rule="nonzero">
                       <g transform="translate(1716.000000, 291.000000)">
@@ -134,17 +136,21 @@
                   </g>
                 </svg>
               </div>
-              <span class="nav-link-text ms-1">RTL</span>
+              <span class="nav-link-text ms-1">
+                Project Settings
+              </span>
             </a>
           </li>
+          {% endif %}
+          {% endwith %}
           <li class="nav-item mt-3">
             <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Account pages</h6>
           </li>
           <li class="nav-item">
-            <a class="nav-link  " href="../pages/profile.html">
+            <a class="nav-link {{p_active}}" href="{% url 'users:profile' %}">
               <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                 <svg width="12px" height="12px" viewBox="0 0 46 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                  <title>customer-support</title>
+                  <title>Profile</title>
                   <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                     <g transform="translate(-1717.000000, -291.000000)" fill="#FFFFFF" fill-rule="nonzero">
                       <g transform="translate(1716.000000, 291.000000)">
@@ -179,9 +185,9 @@
           <nav aria-label="breadcrumb">
             <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
               <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Pages</a></li>
-              <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Dashboard</li>
+              <li class="breadcrumb-item text-sm text-dark active" aria-current="page">{{page_name}}</li>
             </ol>
-            <h6 class="font-weight-bolder mb-0">Dashboard</h6>
+            <h6 class="font-weight-bolder mb-0">{{page_name}}</h6>
           </nav>
           <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
             <div class="ms-md-auto pe-md-3 d-flex align-items-center">

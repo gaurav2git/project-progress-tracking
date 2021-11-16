@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+{% for ep in emp_profile %}
+<div class="container-fluid">
+    <div class="page-header min-height-300 border-radius-xl mt-4" style="background-image: url('{% static 'assets/img/curved-images/curved0.jpg' %}'); background-position-y: 50%;">
+      <span class="mask bg-gradient-primary opacity-6"></span>
+    </div>
+    <div class="card card-body blur shadow-blur mx-4 mt-n6 overflow-hidden">
+      <div class="row gx-4">
+        <div class="col-auto">
+          <div class="avatar avatar-xl position-relative">
+            <img src="{% static 'assets/img/user_profile.png' %}" alt="profile_image" class="w-100 border-radius-lg shadow-sm">
+          </div>
+        </div>
+        <div class="col-auto my-auto">
+          <div class="h-100">
+            <h5 class="mb-1">
+              {{ep.employee_name}}
+            </h5>
+            <p class="mb-0 font-weight-bold text-sm">
+              {{ep.employee_designation}}
+            </p>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 my-sm-auto ms-sm-auto me-sm-0 mx-auto mt-3">
+          <div class="nav-wrapper position-relative end-0">
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid py-4">
+    <div class="row">
+      <div class="col-12 col-xl-12">
+        <div class="card h-100">
+          <div class="card-header pb-0 p-3">
+            <div class="row">
+              <div class="col-md-8 d-flex align-items-center">
+                <h6 class="mb-0">Profile Information:</h6>
+              </div>
+              <div class="col-md-4 text-end">
+                  <i class="fas fa-user-edit text-secondary text-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="Your Profile"></i>
+              </div>
+            </div>
+          </div>
+          <div class="card-body p-3">
+            <ul class="list-group">
+                <br>
+              <li class="list-group-item border-0 ps-0 pt-0 text-sm"><strong class="text-dark">Employee ID:</strong> &nbsp; {{ep.employee_i_d}}</li>
+              <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Employee Name:</strong> &nbsp; {{ep.employee_name}}</li>
+              <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Email:</strong> &nbsp; {{ep.employee_email}}</li>
+              <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Designation:</strong> &nbsp; {{ep.employee_designation}}</li>
+              <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Department:</strong> &nbsp; {{ep.employee_department}}</li>
+              <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Location:</strong> &nbsp; {{ep.get_employee_location_display}}</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+
+{% endblock content %}

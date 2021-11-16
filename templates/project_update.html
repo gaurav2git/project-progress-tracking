@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load static %}
+{% if form.errors %}
+<p style="background-color:rgb(231, 144, 144); color: black; padding:5px;">Invalid Fields.</p>
+{% endif %}
+{% block content %}
+<div class="row">
+    <div class="row my-4">
+      <div class="col-lg-12 col-md-12 mb-md-0 mb-4">
+        <div class="card">
+          <div class="card-header pb-0">
+            <div class="row">
+              <div class="col-lg-6 col-7">
+                <h6>Project: {{project.project_Name}}</h6>
+                <p class="text-sm mb-0">
+                  <span class="font-weight-bold ms-1">Started On: {{project.date_Added}}</span>
+                </p>
+              </div>
+            </div>
+          </div>
+        <div class="card-body px-0 pb-2">
+            <form action="{% url 'projects:project_update' project.id %}" method="post" style="margin: 20px;">
+                {% csrf_token %}
+                <input type="number" name="project_Code" value="{{project.project_Code}}" hidden>
+                <input type="text" name="project_Name" value="{{project.project_Name}}" hidden>
+                <input type="datetime" name="date_Added" value="{{project.project_Code}}" hidden>
+                <label>Project Description</label>
+                <div class="mb-3">
+                    <textarea name="project_Description" class="form-control" >{{project.project_Description}}</textarea>
+                </div>
+                <label>Project Members Allowed</label>
+                <div class="mb-3">
+                    <input type="number" name="project_Members_Allowed" class="form-control" value="{{project.project_Members_Allowed}}">
+                </div>
+                <label>Project Progress (in %)</label>
+                <div class="mb-3">
+                    <input type="number" name="project_Progress" class="form-control" value="{{project.project_Progress}}">
+                </div>
+                <label>Project Closure&nbsp;&nbsp;</label>
+                <div class="mb-3" style="display: inline;">
+                    <input type="checkbox" name="project_Closure" {% if project.project_Closure %}checked{% endif %}>
+                    <br>
+                    <br>
+                </div>
+                <button name="submit" class="btn btn-success">Update</button>
+            </form>
+        </div>
+        
+    </div>
+</div>
+
+{% endblock content %}
