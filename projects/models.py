@@ -28,3 +28,13 @@ class Questionaire(models.Model):
 
     def __str__(self):
         return self.question[:80] + '...'
+
+class ProjectMember(models.Model):
+    project = models.ForeignKey(Project, on_delete=models.CASCADE)
+    member = models.ForeignKey(Employee_Profile, on_delete=models.CASCADE)
+
+    class Meta:
+        unique_together = ('project', 'member',)
+
+    def __str__(self):
+        return str(self.project.project_Code) + ' - ' + str(self.member.employee_i_d)

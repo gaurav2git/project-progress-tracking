@@ -1,8 +1,5 @@
 {% extends 'base.html' %}
 {% load static %}
-{% if form.errors %}
-<p style="background-color:rgb(231, 144, 144); color: black; padding:5px;">Invalid Fields.</p>
-{% endif %}
 {% block content %}
 <div class="row">
     <div class="row my-4">
@@ -16,6 +13,9 @@
             </div>
           </div>
         <div class="card-body px-0 pb-2">
+            {% if form.errors %}
+                <p style="background-color:rgb(231, 144, 144); color: black; padding:5px;">Invalid Fields.</p>
+            {% endif %}
             <form action="{% url 'projects:add_project' %}" method="post" style="margin: 20px;">
                 {% csrf_token %}
                 <label>Project Code</label>
@@ -44,7 +44,7 @@
                     <br>
                     <br>
                 </div>
-                <select name="project_Owner" id="id_project_owner" hidden>
+                <select name="project_Owner" id="id_project_Owner" hidden>
                     {% with user.employee_profile_set.all|first as employee %}
                     {% if employee.is_lead %}
                     <option value={{employee.id}} selected></option>

@@ -8,6 +8,17 @@
     <div class="row my-4">
       <div class="col-lg-12 col-md-12 mb-md-0 mb-4">
         <div class="card">
+            {% if warning_message %}
+            <div class="card-header pb-0">
+              <div class="row">
+                <div class="col-lg-6 col-7">
+                  <h6 style="background-color:rgb(231, 144, 144); color: black; padding:5px;">{{warning_message}}</h6>
+                </div>
+              </div>
+            </div>
+          <div class="card-body px-0 pb-2">
+              </div>
+            {% else %}
           <div class="card-header pb-0">
             <div class="row">
               <div class="col-lg-6 col-7">
@@ -42,10 +53,17 @@
                     <br>
                     <br>
                 </div>
+                <select name="project_Owner" id="id_project_Owner" hidden>
+                    {% with user.employee_profile_set.all|first as employee %}
+                    {% if employee.is_lead %}
+                    <option value={{employee.id}} selected></option>
+                    {% endif %}
+                    {% endwith %}
+                </select>
                 <button name="submit" class="btn btn-success">Update</button>
             </form>
         </div>
-        
+        {% endif %}
     </div>
 </div>
 
