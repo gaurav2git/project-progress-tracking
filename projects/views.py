@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
-from django.http.response import HttpResponseRedirect
+from django.http.response import HttpResponseRedirect, Http404
 from django.urls import reverse
 from .models import Project, Questionaire
 from .forms import ProjectForm, QuestionaireForm
@@ -31,7 +31,7 @@ def index(request):
 
 @login_required
 def project_settings(request):
-    projects = Project.objects.order_by('-date_Added')
+    projects = Project.objects.filter(project_Owner=request.user.employee_profile_set.all()[0]).order_by('-date_Added')
     count=0
     for project in projects:
         if project.project_Closure:
@@ -64,6 +64,9 @@ def add_project(request):
 def project_update(request, project_id):
     project = Project.objects.get(id=project_id)
     
+    if project.project_Owner != request.user.employee_profile_set.all()[0]:
+        raise Http404
+    
     if request.method != 'POST':
         form = ProjectForm(instance=project)
     else:
@@ -78,6 +81,10 @@ def project_update(request, project_id):
 @login_required
 def view_questionaire(request, project_id):
     project = Project.objects.get(id=project_id)
+
+    if project.project_Owner != request.user.employee_profile_set.all()[0]:
+        raise Http404
+
     questions = Questionaire.objects.filter(related_Project=project)
     count = len(questions)
 
@@ -95,6 +102,9 @@ def view_questionaire(request, project_id):
 def add_question(request, project_id):
     
     project = Project.objects.get(id=project_id)
+
+    if project.project_Owner != request.user.employee_profile_set.all()[0]:
+        raise Http404
 
     if request.method != 'POST':
         form = QuestionaireForm()
@@ -117,6 +127,9 @@ def question_update(request, question_id):
     
     question = Questionaire.objects.get(id=question_id)
     
+    if question.related_Project.project_Owner != request.user.employee_profile_set.all()[0]:
+        raise Http404
+
     if request.method != 'POST':
         form = QuestionaireForm(instance=question)
     else:
@@ -131,6 +144,10 @@ def question_update(request, question_id):
 @login_required
 def delete_question(request, question_id):
     question = Questionaire.objects.get(id=question_id)
+
+    if question.related_Project.project_Owner != request.user.employee_profile_set.all()[0]:
+        raise Http404
+
     print(question_id)
     project_id = question.related_Project.id
     question.delete()

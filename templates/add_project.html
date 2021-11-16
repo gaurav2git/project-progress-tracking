@@ -44,6 +44,13 @@
                     <br>
                     <br>
                 </div>
+                <select name="project_Owner" id="id_project_owner" hidden>
+                    {% with user.employee_profile_set.all|first as employee %}
+                    {% if employee.is_lead %}
+                    <option value={{employee.id}} selected></option>
+                    {% endif %}
+                    {% endwith %}
+                </select>
                 <button name="submit" class="btn btn-success">Submit</button>
             </form>
         </div>

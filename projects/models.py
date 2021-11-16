@@ -1,6 +1,8 @@
 from django.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator
 
+from users.models import Employee_Profile
+
 # Create your models here.
 class Project(models.Model):
     """A model for projects"""
@@ -14,6 +16,7 @@ class Project(models.Model):
         validators=[MaxValueValidator(100), MinValueValidator(0)]
      )
     project_Closure = models.BooleanField(default=False)
+    project_Owner = models.ForeignKey(Employee_Profile, null=True, on_delete=models.SET_NULL)
 
     def __str__(self):
         return str(self.project_Code) + "-" + self.project_Name
@@ -21,7 +24,7 @@ class Project(models.Model):
 class Questionaire(models.Model):
     """Model for adding questionaire"""
     question = models.TextField()
-    related_Project = models.ForeignKey(Project, on_delete=models.CASCADE)
+    related_Project = models.ForeignKey(Project, null=True, on_delete=models.SET_NULL)
 
     def __str__(self):
         return self.question[:80] + '...'
