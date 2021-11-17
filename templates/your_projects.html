@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="row">
+    <div class="row my-4">
+      <div class="col-lg-12 col-md-12 mb-md-0 mb-4">
+        <div class="card">
+          <div class="card-header pb-0">
+            <div class="row">
+              <div class="col-lg-6 col-7">
+                <h6>Projects</h6>
+                <p class="text-sm mb-0">
+                  <i class="fa fa-check text-info" aria-hidden="true"></i>
+                  <span class="font-weight-bold ms-1">{{count}} Projects done</span>
+                </p>
+              </div>
+            </div>
+          </div>
+        <div class="card-body px-0 pb-2">
+            <div class="table-responsive">
+            <table class="table align-items-center mb-0">
+                <thead style="text-align: center;">
+                <tr>
+                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Project Code</th>
+                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Project Name</th>
+                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Actions</th>
+                </tr>
+                </thead>
+                <tbody style="text-align: center;">
+                {% for project_member in projects_member %}
+                <tr>
+                    <td>
+                    {{project_member.project.project_Code}}
+                    </td>
+                    <td>
+                    {{project_member.project.project_Name}}
+                    </td>
+                    <td>
+                        <a href="{% url 'projects:view_project' project_member.project.id %}"><button type="button" class="btn btn-info">View Project</button></a>
+                        <a href="{% url 'projects:view_questionaire' project_member.project.id %}"><button type="button" class="btn btn-info">View Questionaire</button></a>
+                    </td>
+                </tr>  
+                {% endfor %}
+                </tbody>
+            </table>
+            </div>
+        </div>
+        
+    </div>
+</div>
+
+{% endblock %}

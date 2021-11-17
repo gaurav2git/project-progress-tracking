@@ -38,3 +38,11 @@ class ProjectMember(models.Model):
 
     def __str__(self):
         return str(self.project.project_Code) + ' - ' + str(self.member.employee_i_d)
+
+class Answer(models.Model):
+    question = models.ForeignKey(Questionaire, on_delete=models.CASCADE)
+    answer = models.TextField()
+    answerer = models.ForeignKey(Employee_Profile, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return str(self.question) + str(self.answerer)

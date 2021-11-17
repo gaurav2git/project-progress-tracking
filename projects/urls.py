@@ -13,4 +13,10 @@ urlpatterns = [
     path('projects/view_team/<int:project_id>', views.view_team, name='view_team'),
     path('projects/add_project_member/<int:project_id>', views.add_project_member, name='add_project_member'),
     path('projects/delete_project_member/<int:project_member_id>', views.delete_project_member, name='delete_project_member'),
+    path('projects/your_projects', views.your_projects, name='your_projects'),
+    path('projects/view_project/<int:project_id>', views.view_project, name='view_project'),
+    path('projects/answer/<int:question_id>', views.answer, name='answer'),
+    path('projects/view_answers/<int:question_id>', views.view_answers, name='view_answers'),
+    path('projects/view_answer/<int:answer_id>', views.view_answer, name='view_answer'),
+    path('projects/delete_answer/<int:answer_id>', views.delete_answer, name='delete_answer'),
 ]

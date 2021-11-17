@@ -1,0 +1,112 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="col-12 col-xl-12">
+    <div class="card h-100">
+        <div class="card-header pb-0 p-3">
+        <div class="row">
+            <div class="col-md-8 d-flex align-items-center">
+            <h6 class="mb-0">Project Details</h6>
+            </div>
+        </div>
+        </div>
+        <div class="card" style="margin: 20px;">
+            <div class="table-responsive" style="margin: 10px;">
+              <table class="table align-items-center mb-0">
+                <tbody>
+                  <tr>
+                    <td>
+                        <b>Project Code</b>
+                    </td>
+                    <td>
+                        {{project.project_Code}}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                        <b>Project Name</b>
+                    </td>
+                    <td>
+                        {{project.project_Name}}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                        <b>Date Added</b>
+                    </td>
+                    <td>
+                        {{project.date_Added}}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                        <b>Project Description</b>
+                    </td>
+                    <td>
+                        {{project.project_Description}}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                        <b>Project Members Allowed</b>
+                    </td>
+                    <td>
+                        {{project.project_Members_Allowed}}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                        <b>Project Progress</b>
+                    </td>
+                    <td>
+                        <div class="progress-wrapper">
+                            <div class="progress-info">
+                              <div class="progress-percentage">
+                                <span class="text-sm font-weight-bold">{{project.project_Progress}}%</span>
+                              </div>
+                            </div>
+                            <div class="progress">
+                              <div class="progress-bar bg-info" role="progressbar" aria-valuenow="{{project.project_Progress}}" aria-valuemin="0" aria-valuemax="100" style="width: {{project.project_Progress}}%;"></div>
+                            </div>
+                        </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                        <b>Project Manager</b>
+                    </td>
+                    <td>
+                        {{project.project_Owner}}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                        <b>Team Members</b>
+                    </td>
+                    <td>
+                        {% for project_member in project_members %}{{project_member.member}}, {% endfor %}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                        <b>Project Status</b>
+                    </td>
+                    <td>
+                        {% if project.project_Closure %}
+                        <span style="color: #bd0000; background-color: #fc9797; padding: 5px; text-transform: uppercase; border-radius: 5px;">Closed</span>
+                        {% else %}
+                        <span style="color: #67b108; background-color: #cdf59b; padding: 5px; text-transform: uppercase; border-radius: 5px;">Open</span>
+                        {% endif %}
+                    </td>
+                  </tr>
+          
+                </tbody>
+              </table>
+            </div>
+          </div>
+    </div>
+</div>
+
+{% endblock content %}

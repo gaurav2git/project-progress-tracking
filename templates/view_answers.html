@@ -9,19 +9,12 @@
           <div class="card-header pb-0">
             <div class="row">
               <div class="col-lg-6 col-7">
-                <h6>{{project}}: Questionaire</h6>
+                <h6>{{question.question}} - Answers</h6>
                 <p class="text-sm mb-0">
                   <i class="fa fa-check text-info" aria-hidden="true"></i>
-                  <span class="font-weight-bold ms-1">Total Questions Added: {{count}}</span>
+                  <span class="font-weight-bold ms-1">{{count}} Answers Received</span>
                 </p>
               </div>
-              {% with user.employee_profile_set.all|first as employee %}
-              {% if employee.is_lead %}
-              <div class="col-lg-6 col-5 my-auto text-end">
-                <a href="{% url 'projects:add_question' project.id %}"><button type="button" class="btn btn-info">Add New Question</button></a>
-              </div>
-              {% endif %}
-              {% endwith %}
             </div>
           </div>
         <div class="card-body px-0 pb-2">
@@ -29,27 +22,24 @@
             <table class="table align-items-center mb-0">
                 <thead style="text-align: center;">
                 <tr>
-                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Question</th>
-                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Action</th>
+                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Answerer</th>
+                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Actions</th>
                 </tr>
                 </thead>
                 <tbody style="text-align: center;">
-                {% for question in questions %}
+                {% for answer in answers %}
                 <tr>
                     <td>
-                    {{question.question}}
+                    {{answer.answerer}}
                     </td>
                     <td>
-                      {% with user.employee_profile_set.all|first as employee %}
-                      {% if employee.is_lead %}
-                        <a href="{% url 'projects:question_update' question.id %}"><button type="button" class="btn btn-info">Update</button></a>
-                        <!-- Button trigger modal -->
-                        <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal{{question.id}}">
+                        <a href="{% url 'projects:view_answer' answer.id %}"><button type="button" class="btn btn-info">View Answer</button></a>
+                        <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal{{answer.id}}">
                             Remove
                         </button>
                         
                         <!-- Modal -->
-                        <div class="modal fade" id="exampleModal{{question.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal fade" id="exampleModal{{answer.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -60,16 +50,11 @@
                                 </div>
                                 <div class="modal-footer">
                                 <button type="button" class="btn bg-gradient-secondary" data-bs-dismiss="modal">Cancel</button>
-                                <a href="{% url 'projects:delete_question' question.id %}"><button type="button" class="btn bg-gradient-primary">Remove</button></a>
+                                <a href="{% url 'projects:delete_answer' answer.id %}"><button type="button" class="btn bg-gradient-primary">Remove</button></a>
                                 </div>
                             </div>
                             </div>
                         </div>
-                        <a href="{% url 'projects:view_answers' question.id %}"><button type="button" class="btn btn-info">View Answers</button></a>
-                        {% else %}
-                        <a href="{% url 'projects:answer' question.id %}"><button type="button" class="btn btn-info">Answer This / Your Answer</button></a>
-                        {% endif %}
-                        {% endwith %}
                     </td>
                 </tr>  
                 {% endfor %}
